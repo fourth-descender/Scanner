@@ -81,23 +81,25 @@ void scanner::scan() {
 
                 #define str(character) std::string(1, character)
                 if (is_special(str(ch))) {
-                    // sChar -> sCharTail.
-                    // terminating state -> id.
+                    // s_char -> s_char_tail.
                     if (is_special(str(ch) + tail)) {
+                        // terminating state -> id.
                         save();
+
+                        // store the first special char.
                         buffer += ch;
                         break;
                     };
-                    // sChar -> INT_NUM and sChar -> sChar.
-                    // second part of one special char.
+
+                    // buffered_s_char -> s_char.
                     if (is_special(buffer + ch)) {
                         buffer += ch;
-                        // terminating state -> special.
+                        // terminating state -> two length special.
                         save();
                         break;
                     };
 
-                    // possible terminating state -> id on nonempty buffer.
+                    // terminating state -> id | int_num on nonempty buffer.
                     save();
                     
                     // terminating state -> single length special.
