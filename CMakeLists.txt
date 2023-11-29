@@ -8,6 +8,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Include scanner subdirectory
 add_subdirectory(scanner)
 
+# Include test subdirectory
+add_subdirectory(test)
+
 # Create the main executable and link with the scanner library
 add_executable(compiler main.cpp)
 target_link_libraries(compiler PRIVATE scanner_lib)

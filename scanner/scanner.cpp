@@ -1,5 +1,4 @@
 #include "scanner.hpp"
-#include <iostream>
 
 #define entry(identifier, keyword) \
     {identifier, token(#keyword, identifier)}

@@ -24,6 +24,17 @@ class token {
         std::string get_value() const {
             return value;
         };
+
+        // for gtest assertions.
+        friend bool operator==(const token& lhs, const token& rhs) {
+            return lhs.get_type() == rhs.get_type() && lhs.get_value() == rhs.get_value();
+        };
+
+        // for gtest actual_tokens and expected_tokens.
+        friend std::ostream& operator<<(std::ostream& os, const token& t) {
+            return os << "{" << t.get_type() << ", " << t.get_value() << ")" << std::endl;
+        };
+
 };
 
 extern const std::unordered_map<std::string, token> s_tokens;
@@ -48,6 +59,10 @@ class scanner {
         void save();
         void clear();
         void write();
+
+        std::vector<token> get_tokens() const {
+            return tokens;
+        };
 };
 
 
